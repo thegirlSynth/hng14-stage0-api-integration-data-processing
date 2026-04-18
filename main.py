@@ -12,7 +12,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -76,7 +76,7 @@ async def classify_api(name: str = Query(..., min_length=1)):
 
     if gender is None or sample_size == 0:
         return JSONResponse(
-            status_code=200,
+            status_code=404,
             content= { 
                 "status": "error", 
                 "message": "No prediction available for the provided name" 
